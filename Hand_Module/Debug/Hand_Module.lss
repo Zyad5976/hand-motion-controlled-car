@@ -1,0 +1,424 @@
+
+Hand_Module.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001d0  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000224  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000224  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000254  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000108  00000000  00000000  00000290  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000c2d  00000000  00000000  00000398  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007e9  00000000  00000000  00000fc5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000006c9  00000000  00000000  000017ae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000190  00000000  00000000  00001e78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000051b  00000000  00000000  00002008  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000207  00000000  00000000  00002523  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000000b8  00000000  00000000  0000272a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   8:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e0 ed       	ldi	r30, 0xD0	; 208
+  68:	f1 e0       	ldi	r31, 0x01	; 1
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	0e 94 41 00 	call	0x82	; 0x82 <main>
+  7a:	0c 94 e6 00 	jmp	0x1cc	; 0x1cc <_exit>
+
+0000007e <__bad_interrupt>:
+  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000082 <main>:
+
+#include "main.h"
+
+int main(void)
+{
+	TIM0_voidInit();
+  82:	0e 94 d2 00 	call	0x1a4	; 0x1a4 <TIM0_voidInit>
+	UART_voidInit();
+  86:	0e 94 d7 00 	call	0x1ae	; 0x1ae <UART_voidInit>
+	TWI_voidMasterInit();
+  8a:	0e 94 ab 00 	call	0x156	; 0x156 <TWI_voidMasterInit>
+	MPU_voidInit();
+  8e:	0e 94 88 00 	call	0x110	; 0x110 <MPU_voidInit>
+	u8 Loc_command = 0;
+	
+	
+    while (1) 
+    {
+		Loc_status_X = MPU_s16GetRawAccelX();
+  92:	0e 94 a3 00 	call	0x146	; 0x146 <MPU_s16GetRawAccelX>
+  96:	ec 01       	movw	r28, r24
+		Loc_status_Z = MPU_s16GetRawAccelZ();
+  98:	0e 94 a7 00 	call	0x14e	; 0x14e <MPU_s16GetRawAccelZ>
+		
+		if(Loc_status_Z > 2500) // Virtual Threshold
+  9c:	85 3c       	cpi	r24, 0xC5	; 197
+  9e:	29 e0       	ldi	r18, 0x09	; 9
+  a0:	92 07       	cpc	r25, r18
+  a2:	64 f4       	brge	.+24     	; 0xbc <main+0x3a>
+		{
+			Loc_command = 'F';
+		}
+		
+		else if(Loc_status_Z < -2500) // Virtual Threshold
+  a4:	8c 33       	cpi	r24, 0x3C	; 60
+  a6:	96 4f       	sbci	r25, 0xF6	; 246
+  a8:	5c f0       	brlt	.+22     	; 0xc0 <main+0x3e>
+		{
+			Loc_command = 'B';
+		}
+		
+		else if(Loc_status_X > 2500) // Virtual Threshold
+  aa:	c5 3c       	cpi	r28, 0xC5	; 197
+  ac:	89 e0       	ldi	r24, 0x09	; 9
+  ae:	d8 07       	cpc	r29, r24
+  b0:	4c f4       	brge	.+18     	; 0xc4 <main+0x42>
+		{
+			Loc_command = 'R';
+		}
+		
+		else if(Loc_status_X < -2500) // Virtual Threshold
+  b2:	cc 33       	cpi	r28, 0x3C	; 60
+  b4:	d6 4f       	sbci	r29, 0xF6	; 246
+  b6:	44 f4       	brge	.+16     	; 0xc8 <main+0x46>
+		{
+			Loc_command = 'L';
+  b8:	8c e4       	ldi	r24, 0x4C	; 76
+  ba:	07 c0       	rjmp	.+14     	; 0xca <main+0x48>
+		Loc_status_X = MPU_s16GetRawAccelX();
+		Loc_status_Z = MPU_s16GetRawAccelZ();
+		
+		if(Loc_status_Z > 2500) // Virtual Threshold
+		{
+			Loc_command = 'F';
+  bc:	86 e4       	ldi	r24, 0x46	; 70
+  be:	05 c0       	rjmp	.+10     	; 0xca <main+0x48>
+		}
+		
+		else if(Loc_status_Z < -2500) // Virtual Threshold
+		{
+			Loc_command = 'B';
+  c0:	82 e4       	ldi	r24, 0x42	; 66
+  c2:	03 c0       	rjmp	.+6      	; 0xca <main+0x48>
+		}
+		
+		else if(Loc_status_X > 2500) // Virtual Threshold
+		{
+			Loc_command = 'R';
+  c4:	82 e5       	ldi	r24, 0x52	; 82
+  c6:	01 c0       	rjmp	.+2      	; 0xca <main+0x48>
+			Loc_command = 'L';
+		}
+		
+		else
+		{
+			Loc_command = 'S';
+  c8:	83 e5       	ldi	r24, 0x53	; 83
+		}
+		
+		UART_voidSendData(Loc_command);
+  ca:	0e 94 e2 00 	call	0x1c4	; 0x1c4 <UART_voidSendData>
+		
+    }
+  ce:	e1 cf       	rjmp	.-62     	; 0x92 <main+0x10>
+
+000000d0 <MPU_s16ReadAxisRaw>:
+}
+
+s16 MPU_s16GetRawAccelY(void)
+{
+	return MPU_s16ReadAxisRaw(Y_HIGH);
+}
+  d0:	cf 93       	push	r28
+  d2:	df 93       	push	r29
+  d4:	c8 2f       	mov	r28, r24
+  d6:	0e 94 b4 00 	call	0x168	; 0x168 <TWI_voidMasterSendStart>
+  da:	80 ed       	ldi	r24, 0xD0	; 208
+  dc:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+  e0:	8c 2f       	mov	r24, r28
+  e2:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+  e6:	0e 94 b4 00 	call	0x168	; 0x168 <TWI_voidMasterSendStart>
+  ea:	81 ed       	ldi	r24, 0xD1	; 209
+  ec:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+  f0:	0e 94 c4 00 	call	0x188	; 0x188 <TWI_u8MasterReadByteWithACK>
+  f4:	c8 2f       	mov	r28, r24
+  f6:	0e 94 cb 00 	call	0x196	; 0x196 <TWI_u8MasterReadByteWithNACK>
+  fa:	d8 2f       	mov	r29, r24
+  fc:	0e 94 ba 00 	call	0x174	; 0x174 <TWI_voidMasterSendStop>
+ 100:	8c 2f       	mov	r24, r28
+ 102:	90 e0       	ldi	r25, 0x00	; 0
+ 104:	98 2f       	mov	r25, r24
+ 106:	88 27       	eor	r24, r24
+ 108:	8d 2b       	or	r24, r29
+ 10a:	df 91       	pop	r29
+ 10c:	cf 91       	pop	r28
+ 10e:	08 95       	ret
+
+00000110 <MPU_voidInit>:
+ 110:	0e 94 b4 00 	call	0x168	; 0x168 <TWI_voidMasterSendStart>
+ 114:	80 ed       	ldi	r24, 0xD0	; 208
+ 116:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 11a:	8b e6       	ldi	r24, 0x6B	; 107
+ 11c:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 120:	80 e0       	ldi	r24, 0x00	; 0
+ 122:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 126:	0e 94 ba 00 	call	0x174	; 0x174 <TWI_voidMasterSendStop>
+ 12a:	0e 94 b4 00 	call	0x168	; 0x168 <TWI_voidMasterSendStart>
+ 12e:	80 ed       	ldi	r24, 0xD0	; 208
+ 130:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 134:	8c e1       	ldi	r24, 0x1C	; 28
+ 136:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 13a:	80 e0       	ldi	r24, 0x00	; 0
+ 13c:	0e 94 bd 00 	call	0x17a	; 0x17a <TWI_voidMasterWriteByte>
+ 140:	0e 94 ba 00 	call	0x174	; 0x174 <TWI_voidMasterSendStop>
+ 144:	08 95       	ret
+
+00000146 <MPU_s16GetRawAccelX>:
+ 146:	8b e3       	ldi	r24, 0x3B	; 59
+ 148:	0e 94 68 00 	call	0xd0	; 0xd0 <MPU_s16ReadAxisRaw>
+ 14c:	08 95       	ret
+
+0000014e <MPU_s16GetRawAccelZ>:
+
+s16 MPU_s16GetRawAccelZ(void)
+{
+	return MPU_s16ReadAxisRaw(Z_HIGH);
+ 14e:	8f e3       	ldi	r24, 0x3F	; 63
+ 150:	0e 94 68 00 	call	0xd0	; 0xd0 <MPU_s16ReadAxisRaw>
+ 154:	08 95       	ret
+
+00000156 <TWI_voidMasterInit>:
+#include "I2C_interface.h"
+
+void TWI_voidMasterInit(void)
+{
+	/* Set Bit Rate Register */
+		TWBR_REG = TWI_TWBR_VAL;
+ 156:	8c e0       	ldi	r24, 0x0C	; 12
+ 158:	80 b9       	out	0x00, r24	; 0
+		
+	/* Set Prescaler */
+		TWSR_REG = (TWSR_REG & 0xFC) | TWI_PRESCALER;
+ 15a:	81 b1       	in	r24, 0x01	; 1
+ 15c:	8c 7f       	andi	r24, 0xFC	; 252
+ 15e:	81 b9       	out	0x01, r24	; 1
+		
+	/* TWI Enable Bit */
+		SET_BIT(TWCR_REG, TWEN_BIT);
+ 160:	86 b7       	in	r24, 0x36	; 54
+ 162:	84 60       	ori	r24, 0x04	; 4
+ 164:	86 bf       	out	0x36, r24	; 54
+ 166:	08 95       	ret
+
+00000168 <TWI_voidMasterSendStart>:
+}
+
+void TWI_voidMasterSendStart(void)
+{
+	/* Set TWI Interrupt Falg | Set TWI Start Condition | Set TWI Enable */
+		TWCR_REG = (1 << TWINT_BIT) | (1 << TWSTA_BIT) | (1 << TWEN_BIT);
+ 168:	84 ea       	ldi	r24, 0xA4	; 164
+ 16a:	86 bf       	out	0x36, r24	; 54
+		
+	/* Polling on Flag */
+		while(GET_BIT(TWCR_REG, TWINT_BIT) == 0);
+ 16c:	06 b6       	in	r0, 0x36	; 54
+ 16e:	07 fe       	sbrs	r0, 7
+ 170:	fd cf       	rjmp	.-6      	; 0x16c <TWI_voidMasterSendStart+0x4>
+}
+ 172:	08 95       	ret
+
+00000174 <TWI_voidMasterSendStop>:
+
+void TWI_voidMasterSendStop(void)
+{
+	/* Set TWI Interrupt Falg | Set TWI Stop Condition | Set TWI Enable */
+		TWCR_REG = (1 << TWINT_BIT) | (1 << TWSTO_BIT) | (1 << TWEN_BIT);
+ 174:	84 e9       	ldi	r24, 0x94	; 148
+ 176:	86 bf       	out	0x36, r24	; 54
+ 178:	08 95       	ret
+
+0000017a <TWI_voidMasterWriteByte>:
+}
+
+void TWI_voidMasterWriteByte(u8 copy_u8data)
+{
+	/* Send Data */
+		TWDR_REG = copy_u8data;
+ 17a:	83 b9       	out	0x03, r24	; 3
+		
+	/* Set TWI Interrupt Falg | Set TWI Enable */
+		TWCR_REG = (1 << TWINT_BIT) | (1 << TWEN_BIT);
+ 17c:	84 e8       	ldi	r24, 0x84	; 132
+ 17e:	86 bf       	out	0x36, r24	; 54
+		
+	/* Polling on Flag */
+		while(GET_BIT(TWCR_REG, TWINT_BIT) == 0);
+ 180:	06 b6       	in	r0, 0x36	; 54
+ 182:	07 fe       	sbrs	r0, 7
+ 184:	fd cf       	rjmp	.-6      	; 0x180 <TWI_voidMasterWriteByte+0x6>
+}
+ 186:	08 95       	ret
+
+00000188 <TWI_u8MasterReadByteWithACK>:
+u8 TWI_u8MasterReadByteWithACK(void)
+{
+	u8 Loc_Val = 0;
+	
+	/* Set TWI Interrupt Falg | Enable ACK Bit | Set TWI Enable */
+		TWCR_REG = (1 << TWINT_BIT) | (1 << TWEA_BIT) | (1 << TWEN_BIT);
+ 188:	84 ec       	ldi	r24, 0xC4	; 196
+ 18a:	86 bf       	out	0x36, r24	; 54
+		
+	/* Polling on Flag */
+		while(GET_BIT(TWCR_REG, TWINT_BIT) == 0);
+ 18c:	06 b6       	in	r0, 0x36	; 54
+ 18e:	07 fe       	sbrs	r0, 7
+ 190:	fd cf       	rjmp	.-6      	; 0x18c <TWI_u8MasterReadByteWithACK+0x4>
+		
+	Loc_Val = TWDR_REG;
+ 192:	83 b1       	in	r24, 0x03	; 3
+	
+	return Loc_Val;
+}
+ 194:	08 95       	ret
+
+00000196 <TWI_u8MasterReadByteWithNACK>:
+u8 TWI_u8MasterReadByteWithNACK(void)
+{
+	u8 Loc_Val = 0;
+	
+	/* Set TWI Interrupt Falg | Set TWI Enable */
+		TWCR_REG = (1 << TWINT_BIT) | (1 << TWEN_BIT);
+ 196:	84 e8       	ldi	r24, 0x84	; 132
+ 198:	86 bf       	out	0x36, r24	; 54
+	
+	/* Polling on Flag */
+		while(GET_BIT(TWCR_REG, TWINT_BIT) == 0);
+ 19a:	06 b6       	in	r0, 0x36	; 54
+ 19c:	07 fe       	sbrs	r0, 7
+ 19e:	fd cf       	rjmp	.-6      	; 0x19a <TWI_u8MasterReadByteWithNACK+0x4>
+	
+	Loc_Val = TWDR_REG;
+ 1a0:	83 b1       	in	r24, 0x03	; 3
+	
+	return Loc_Val;
+}
+ 1a2:	08 95       	ret
+
+000001a4 <TIM0_voidInit>:
+#include "TIM0_REG.h"
+
+void TIM0_voidInit(void)
+{
+	/* 1- Select Mode --> CTC Mode / 2- Select Prescaler --> 64 */
+		TCCR0_REG = 0x0B;
+ 1a4:	8b e0       	ldi	r24, 0x0B	; 11
+ 1a6:	83 bf       	out	0x33, r24	; 51
+		
+	/* 3- Load OCR0 Val */
+		OCR0_REG = TIM0_OCR0_VALUE;
+ 1a8:	89 ef       	ldi	r24, 0xF9	; 249
+ 1aa:	8c bf       	out	0x3c, r24	; 60
+ 1ac:	08 95       	ret
+
+000001ae <UART_voidInit>:
+
+
+void UART_voidInit(void)
+{
+	/* 1- Set UART Baud Rate : 9600 */
+		UBRRL_REG = (u8)UBRR_VALUE;
+ 1ae:	87 e6       	ldi	r24, 0x67	; 103
+ 1b0:	89 b9       	out	0x09, r24	; 9
+		
+	/* 2- Character Size --> 8 bit */
+		UCSRC_REG = 0x86;
+ 1b2:	86 e8       	ldi	r24, 0x86	; 134
+ 1b4:	80 bd       	out	0x20, r24	; 32
+		
+	/* 3- TX & RX Enbale */
+		SET_BIT(UCSRB_REG, TXEN_BIT);
+ 1b6:	8a b1       	in	r24, 0x0a	; 10
+ 1b8:	88 60       	ori	r24, 0x08	; 8
+ 1ba:	8a b9       	out	0x0a, r24	; 10
+		SET_BIT(UCSRB_REG, RXEN_BIT);
+ 1bc:	8a b1       	in	r24, 0x0a	; 10
+ 1be:	80 61       	ori	r24, 0x10	; 16
+ 1c0:	8a b9       	out	0x0a, r24	; 10
+ 1c2:	08 95       	ret
+
+000001c4 <UART_voidSendData>:
+}
+
+void UART_voidSendData(u8 copy_u8data)
+{
+	/* 1- Storage data in UDR_REG */
+		UDR_REG = copy_u8data;
+ 1c4:	8c b9       	out	0x0c, r24	; 12
+		
+	/* 2- Polling */
+		while(GET_BIT(UCSRA_REG, UDRE_BIT) == 0);
+ 1c6:	5d 9b       	sbis	0x0b, 5	; 11
+ 1c8:	fe cf       	rjmp	.-4      	; 0x1c6 <UART_voidSendData+0x2>
+}
+ 1ca:	08 95       	ret
+
+000001cc <_exit>:
+ 1cc:	f8 94       	cli
+
+000001ce <__stop_program>:
+ 1ce:	ff cf       	rjmp	.-2      	; 0x1ce <__stop_program>
