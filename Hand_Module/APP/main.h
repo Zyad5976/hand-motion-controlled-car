@@ -23,8 +23,8 @@
 #include "../MCAL/UART/UART_interface.h"
 #include "../MCAL/TIM0/TIM0_interface.h"
 #include "../MCAL/I2C/I2C_interface.h"
-// #include "../MCAL/ADC/ADC_interface.h"
-// #include "../MCAL/ADC/ADC_CFG.h"
+#include "../MCAL/ADC/ADC_interface.h"
+#include "../MCAL/ADC/ADC_CFG.h"
 
 /* HAL */
 #include "../HAL/LED/LED_interface.h"
