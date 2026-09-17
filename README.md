@@ -60,10 +60,13 @@ This structure keeps hardware-specific code isolated from application logic, mak
 ## ⚙️ Key Engineering Highlights
 
 - ✅ Full **MCAL → HAL → APP** layered driver stack, built from scratch
-- ✅ Custom **I2C/TWI driver** for reliable MPU6050 communication
+- ✅ Custom **I2C/TWI driver** for reliable MPU6050 communication, including
+  bus-recovery and timeout handling for real-world breadboard reliability
 - ✅ **PWM-based motor speed control** via Timer peripherals
 - ✅ Wireless **UART/Bluetooth** communication protocol between two independent MCUs
-- ✅ Architectural decision to replace flex sensors with an **MPU6050 accelerometer**, reducing cost while improving motion accuracy
+- ✅ **Dual-sensor gesture control**: MPU6050 accelerometer determines
+  driving direction (tilt-based), while a flex sensor sets driving speed
+  (bend the finger to accelerate from 70% to 100%)
 - ✅ Simulated and validated in **Proteus** prior to hardware deployment
 
 ---
