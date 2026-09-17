@@ -17,8 +17,12 @@
 #define FLEX_FIFTH_FINGER					ADC4
 
 
+/* Flex Raw Range (Real Hardware) */
+#define FLEX_RAW_MIN						240
+#define FLEX_RAW_MAX						295
+
 /* Flex Threshold */
-#define FLEX_THRESHOLD						127
+#define FLEX_THRESHOLD_MAX					265
 
 /* Finger State */
 #define FLEX_STATE_FLAT						0
