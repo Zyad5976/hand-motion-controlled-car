@@ -36,6 +36,8 @@ void TWI_voidMasterSendStop(void)
 {
 	/* Set TWI Interrupt Falg | Set TWI Stop Condition | Set TWI Enable */
 		TWCR_REG = (1 << TWINT_BIT) | (1 << TWSTO_BIT) | (1 << TWEN_BIT);
+		
+		while(GET_BIT(TWCR_REG, TWSTO_BIT));
 }
 
 void TWI_voidMasterWriteByte(u8 copy_u8data)
@@ -88,3 +90,4 @@ u8 TWI_u8MasterGetStatus(void)
 	
 	return Loc_Status;
 }
+
