@@ -108,3 +108,29 @@ s16 MPU_s16GetRawAccelZ(void)
 {
 	return MPU_s16ReadAxisRaw(Z_HIGH);
 }
+
+u8 MPU_u8GetYDirection(void)
+{
+	s16 Loc_s16Y = MPU_s16GetRawAccelY();
+	
+	if(Loc_s16Y < MPU_Y_BOUNDARY_BACKWARD_TO_BASE)
+	{
+		return MPU_Y_DIR_BACKWARD;
+	}
+	else if(Loc_s16Y < MPU_Y_BOUNDARY_BASE_TO_RIGHT)
+	{
+		return MPU_Y_DIR_BASE;
+	}
+	else if(Loc_s16Y < MPU_Y_BOUNDARY_RIGHT_TO_LEFT)
+	{
+		return MPU_Y_DIR_RIGHT;
+	}
+	else if(Loc_s16Y < MPU_Y_BOUNDARY_LEFT_TO_FORWARD)
+	{
+		return MPU_Y_DIR_LEFT;
+	}
+	else
+	{
+		return MPU_Y_DIR_FORWARD;
+	}
+}
